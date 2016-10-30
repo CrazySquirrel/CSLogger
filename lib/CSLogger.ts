@@ -19,6 +19,20 @@ const MD5 = require("crypto-js/md5");
 let AnimationFrame = require("AnimationFrame");
 let Utils = require("Utils");
 
+declare var global: any;
+
+let root;
+
+if (typeof window === "undefined") {
+    if (typeof global !== "undefined") {
+        root = global;
+    } else {
+        root = {};
+    }
+} else {
+    root = window;
+}
+
 const STATUSES: any = {
     600: "Some uncaught error",
 
@@ -143,10 +157,10 @@ class CSLogger {
 /**
  * Add logger to global error event
  */
-if (!window.eventListenerAdded) {
-    let errorHandler = window.onerror;
+if (!root.eventListenerAdded) {
+    let errorHandler = root.onerror;
 
-    window.onerror = (errorMsg, url, lineNumber, column, errorObj) => {
+    root.onerror = (errorMsg, url, lineNumber, column, errorObj) => {
         if (typeof errorHandler === "function") {
             errorHandler(errorMsg, url, lineNumber, column, errorObj);
         }
@@ -162,7 +176,7 @@ if (!window.eventListenerAdded) {
         );
     };
 
-    window.eventListenerAdded = true;
+    root.eventListenerAdded = true;
 }
 /**
  * Subscribe logger to watcher
