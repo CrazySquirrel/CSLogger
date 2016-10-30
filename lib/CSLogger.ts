@@ -40,7 +40,7 @@ const STATUSES: any = {
     0: "Something",
 };
 
-class Logger {
+class CSLogger {
     public static eventListenerAdded: boolean = false;
 
     public static arrLog: Array<any> = [];
@@ -52,11 +52,13 @@ class Logger {
     public static settings = {
         loggerUrl: "",
         minLoggerLevel: 500,
+        projectName: "",
+        projectVersion: "",
     };
 
     public static init(settings) {
-        Logger.settings = Object.assign(Logger.settings, settings);
-        return Logger;
+        CSLogger.settings = Object.assign(CSLogger.settings, settings);
+        return CSLogger;
     }
 
     /**
@@ -72,12 +74,12 @@ class Logger {
         message = message || STATUSES[status] || "";
         properties = properties || {};
 
-        if (status >= Logger.settings.minLoggerLevel) {
+        if (status >= CSLogger.settings.minLoggerLevel) {
             let logObj = {
                 date: new Date(),
                 location: location.href,
-                projectName: Logger.projectName,
-                projectVersion: Logger.projectVersion,
+                projectName: CSLogger.settings.projectName,
+                projectVersion: CSLogger.settings.projectVersion,
                 stack: Utils.stack(),
                 user: Utils.User.getInfo(),
                 message,
@@ -85,7 +87,7 @@ class Logger {
                 status,
             };
 
-            Logger.arrLog.push(logObj);
+            CSLogger.arrLog.push(logObj);
         }
     }
 
@@ -112,8 +114,8 @@ class Logger {
      * Log send watcher
      */
     public static watch() {
-        if (Logger.arrLog.length > 0 && Logger.arrLog.length < 100) {
-            for (let l of Logger.arrLog) {
+        if (CSLogger.arrLog.length > 0 && CSLogger.arrLog.length < 100) {
+            for (let l of CSLogger.arrLog) {
                 let data = encodeURIComponent(JSON.stringify(l));
                 let uid = MD5(JSON.stringify({
                     message: l.message,
@@ -121,20 +123,20 @@ class Logger {
                     projectVersion: l.projectVersion,
                     status: l.status,
                 })).toString();
-                if (Logger.arrSended.indexOf(uid) === -1) {
-                    Logger.arrSended.push(uid);
+                if (CSLogger.arrSended.indexOf(uid) === -1) {
+                    CSLogger.arrSended.push(uid);
                     if (
                         process.env.NODE_ENV === "production" &&
-                        Logger.settings.loggerUrl
+                        CSLogger.settings.loggerUrl
                     ) {
                         let i = new Image();
-                        i.src = Logger.settings.loggerUrl + "?uid=" + uid + "&data=" + data;
+                        i.src = CSLogger.settings.loggerUrl + "?uid=" + uid + "&data=" + data;
                     } else {
-                        Logger.showMessange(l.status, l);
+                        CSLogger.showMessange(l.status, l);
                     }
                 }
             }
-            Logger.arrLog = [];
+            CSLogger.arrLog = [];
         }
     }
 }
@@ -148,7 +150,7 @@ if (!window.eventListenerAdded) {
         if (typeof errorHandler === "function") {
             errorHandler(errorMsg, url, lineNumber, column, errorObj);
         }
-        Logger.log(
+        CSLogger.log(
             600,
             errorMsg,
             {
@@ -165,9 +167,9 @@ if (!window.eventListenerAdded) {
 /**
  * Subscribe logger to watcher
  */
-AnimationFrame.subscribe({}, Logger.watch, []);
+AnimationFrame.subscribe({}, CSLogger.watch, []);
 /**
  * Return logger
  */
-export default Logger.init;
-module.exports = Logger.init;
+export default CSLogger.init;
+module.exports = CSLogger.init;

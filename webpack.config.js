@@ -36,7 +36,7 @@ let objBuildList = {};
 objBuildList = Object.assign(
     objBuildList,
     {
-        "./lib/Logger": ["./lib/Logger.ts"],
+        "./lib/CSLogger": ["./lib/CSLogger.ts"],
         "./dist/simple-typescript-example/index": ["./src/simple-typescript-example/index.ts"],
         "./dist/simple-javascript-example/index": ["./src/simple-javascript-example/index.ts"],
     }
@@ -116,12 +116,12 @@ module.exports = {
     entry: objBuildList,
     output: {
         filename: "[name].js",
-        library: "Logger",
+        library: "CSLogger",
         libraryTarget: "umd",
         umdNamedDefine: true
     },
     externals: {
-        "Logger": "Logger"
+        "CSLogger": "CSLogger"
     },
     devtool: (NODE_ENV == "development" ? "inline-source-map" : (NODE_ENV == "testing" ? "inline-source-map" : "")),
     plugins: arrPlugins,

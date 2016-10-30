@@ -2,8 +2,10 @@
 declare var require: any;
 require("./index.html");
 
-let Logger = require("../../lib/Logger.js")({
+let CSLogger = require("../../lib/CSLogger.js")({
     loggerUrl: "http://localhost/",
     minLoggerLevel: 100,
+    projectName: "",
+    projectVersion: "",
 });
-Logger.log(100, "Test messange");
+CSLogger.log(100, "Test messange");

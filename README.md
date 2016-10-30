@@ -1,7 +1,7 @@
-# Logger
-[![npm version](https://badge.fury.io/js/Logger.svg)](https://github.com/CrazySquirrel/Logger)
-[![license](https://img.shields.io/github/license/CrazySquirrel/Logger.svg)](https://github.com/CrazySquirrel/Logger)
-[![Github All Releases](https://img.shields.io/github/downloads/CrazySquirrel/Logger/total.svg)](https://github.com/CrazySquirrel/Logger)
+# CSLogger
+[![npm version](https://badge.fury.io/js/CSLogger.svg)](https://github.com/CrazySquirrel/CSLogger)
+[![license](https://img.shields.io/github/license/CrazySquirrel/CSLogger.svg)](https://github.com/CrazySquirrel/CSLogger)
+[![Github All Releases](https://img.shields.io/github/downloads/CrazySquirrel/CSLogger/total.svg)](https://github.com/CrazySquirrel/CSLogger)
 [![npm version](https://img.shields.io/badge/donate-%E2%99%A5-red.svg)](http://crazysquirrel.ru/support/)
 
 Logger for JavaScript messages.
@@ -20,21 +20,25 @@ The build required NodeJs version 6 or higher.
 ## Usage
 
 ```TypeScript
-import LoggerClass from "Logger.ts";
+import CSLoggerClass from "CSLogger.ts";
 
-let Logger = LoggerClass({
+let CSLogger = CSLoggerClass({
     loggerUrl: "http://localhost/",
     minLoggerLevel: 100,
+    projectName: "",
+    projectVersion: "",
 });
-Logger.log(100, "Test messange");
+CSLogger.log(100, "Test messange");
 ```
 
 or
 
 ```JavaScript
-let Logger = require("Logger.js")({
+let CSLogger = require("CSLogger.js")({
     loggerUrl: "http://localhost/",
     minLoggerLevel: 100,
+    projectName: "",
+    projectVersion: "",
 });
-Logger.log(100, "Test messange");
+CSLogger.log(100, "Test messange");
 ```

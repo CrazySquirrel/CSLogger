@@ -1,7 +1,7 @@
 {
-  "name": "Logger",
+  "name": "CSLogger",
   "version": "1.0.1",
-  "main": "./lib/Logger.js",
+  "main": "./lib/CSLogger.js",
   "description": "Logger for JavaScript messages.",
   "keywords": [
     "TypeScript",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:CrazySquirrel/Logger.git"
+    "url": "git@github.com:CrazySquirrel/CSLogger.git"
   },
   "scripts": {
     "development": "NODE_ENV=development webpack --bail --config=webpack.config.js",
