@@ -9,15 +9,15 @@ import IWindow from "../interfaces/IWindow";
 declare var window: IWindow;
 declare var require: any;
 declare var process: any;
+declare var module: any;
 
 const MD5 = require("crypto-js/md5");
 
 /**
  * Import Animation frame
  */
-import AnimationFrame from "../vendors/AnimationFrame";
-
-import Utils from "../vendors/Utils";
+let AnimationFrame = require("AnimationFrame");
+let Utils = require("Utils");
 
 const STATUSES: any = {
     600: "Some uncaught error",
@@ -49,6 +49,16 @@ class Logger {
     public static projectName: string = "#PACKAGE_NAME#";
     public static projectVersion: string = "#PACKAGE_VERSION#";
 
+    public static settings = {
+        loggerUrl: "",
+        minLoggerLevel: 500,
+    };
+
+    public static init(settings) {
+        Logger.settings = Object.assign(Logger.settings, settings);
+        return Logger;
+    }
+
     /**
      * Log method
      * @param status
@@ -62,7 +72,7 @@ class Logger {
         message = message || STATUSES[status] || "";
         properties = properties || {};
 
-        if (status >= 400) {
+        if (status >= Logger.settings.minLoggerLevel) {
             let logObj = {
                 date: new Date(),
                 location: location.href,
@@ -91,12 +101,6 @@ class Logger {
             messangeLavel = "error";
         }
         if (
-            typeof window.Debug === "object" &&
-            typeof window.Debug.console === "object" &&
-            typeof window.Debug.console[messangeLavel] === "function"
-        ) {
-            window.Debug.console[messangeLavel](message);
-        } else if (
             typeof console === "object" &&
             typeof console[messangeLavel] === "function"
         ) {
@@ -119,12 +123,12 @@ class Logger {
                 })).toString();
                 if (Logger.arrSended.indexOf(uid) === -1) {
                     Logger.arrSended.push(uid);
-                    if (process.env.NODE_ENV === "production") {
+                    if (
+                        process.env.NODE_ENV === "production" &&
+                        Logger.settings.loggerUrl
+                    ) {
                         let i = new Image();
-                        /**
-                         * TODO: Use youe logger url
-                         */
-                        //i.src = "<Your url>?uid=" + uid + "&data=" + data;
+                        i.src = Logger.settings.loggerUrl + "?uid=" + uid + "&data=" + data;
                     } else {
                         Logger.showMessange(l.status, l);
                     }
@@ -165,4 +169,5 @@ AnimationFrame.subscribe({}, Logger.watch, []);
 /**
  * Return logger
  */
-export default Logger;
+export default Logger.init;
+module.exports = Logger.init;

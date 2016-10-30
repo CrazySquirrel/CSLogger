@@ -5,7 +5,7 @@
     "inlineSourceMap": true
   },
   "files": [
-
+    "./lib/Logger.ts"
   ],
   "exclude": [
     "node_modules",
