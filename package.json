@@ -1,6 +1,6 @@
 {
   "name": "Logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/Logger.js",
   "description": "Logger for JavaScript messages.",
   "keywords": [
