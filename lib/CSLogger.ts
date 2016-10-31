@@ -71,7 +71,13 @@ class CSLogger {
     };
 
     public static init(settings) {
-        CSLogger.settings = Object.assign(CSLogger.settings, settings);
+        if (typeof settings === "object") {
+            for (let prop in settings) {
+                if (settings.hasOwnProperty(prop)) {
+                    CSLogger.settings[prop] = settings[prop];
+                }
+            }
+        }
         return CSLogger;
     }
 

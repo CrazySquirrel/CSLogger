@@ -1,3 +1,6 @@
+## [1.0.5] - 2016-10-31
+### Changed
+- Polyfill was added
 ## [1.0.4] - 2016-10-30
 ### Changed
 - Window scope was fixed
