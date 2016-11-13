@@ -115,7 +115,7 @@ arrPlugins.push(
 module.exports = {
     entry: objBuildList,
     output: {
-        filename: "[name].js",
+        filename: NODE_ENV == "production" ? "[name].min.js" : "[name].js",
         library: "CSLogger",
         libraryTarget: "umd",
         umdNamedDefine: true
@@ -161,8 +161,7 @@ module.exports = {
                     }),
                     "babel-loader?presets[]=babel-preset-es2015-loose",
                     "ts-loader"
-                ],
-                exclude: /node_modules/
+                ]
             },
             {
                 test: /\.html/i,
