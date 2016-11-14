@@ -206,5 +206,6 @@ AnimationFrame.subscribe({}, CSLogger.watch, []);
 /**
  * Return logger
  */
-export default CSLogger.init;
-module.exports = CSLogger.init;
+let _Init = CSLogger.init;
+export default _Init;
+module.exports = _Init;
