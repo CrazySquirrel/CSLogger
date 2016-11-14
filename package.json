@@ -1,6 +1,6 @@
 {
   "name": "CSLogger",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "main": "./lib/CSLogger.js",
   "description": "Logger for JavaScript messages.",
   "keywords": [
