@@ -6,6 +6,9 @@ interface IWindow {
     eventListenerAdded: boolean;
 
     onerror: Function;
+
+    Debug: any;
+    CSDebug: any;
 }
 /**
  * Declare window interface

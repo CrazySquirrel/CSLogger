@@ -122,7 +122,22 @@ class CSLogger {
         } else if (status >= 500) {
             messangeLavel = "error";
         }
+
         if (
+            typeof window === "object" &&
+            typeof window.Debug === "object" &&
+            typeof window.Debug.console === "object" &&
+            typeof window.Debug.console[messangeLavel] === "function"
+        ) {
+            window.Debug.console[messangeLavel](message);
+        } else if (
+            typeof window === "object" &&
+            typeof window.CSDebug === "object" &&
+            typeof window.CSDebug.console === "object" &&
+            typeof window.CSDebug.console[messangeLavel] === "function"
+        ) {
+            window.CSDebug.console[messangeLavel](message);
+        } else if (
             typeof console === "object" &&
             typeof console[messangeLavel] === "function"
         ) {
