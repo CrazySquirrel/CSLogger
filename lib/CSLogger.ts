@@ -89,59 +89,80 @@ class CSLogger {
      */
     public static log(status?: number,
                       message?: string,
-                      properties?: any): void {
-        status = status || 101;
-        message = message || STATUSES[status] || "";
-        properties = properties || {};
+                      properties?: any): boolean {
+        if (
+            typeof status === "number" &&
+            status > 0 &&
+            typeof message === "string" &&
+            message.length > 0
+        ) {
+            status = status || 101;
+            message = message || STATUSES[status] || "";
+            properties = properties || {};
 
-        if (status >= CSLogger.settings.minLoggerLevel) {
-            let logObj = {
-                date: new Date(),
-                location: location.href,
-                projectName: CSLogger.settings.projectName,
-                projectVersion: CSLogger.settings.projectVersion,
-                stack: Utils.stack(),
-                user: Utils.User.getInfo(),
-                message,
-                properties,
-                status,
-            };
+            if (status >= CSLogger.settings.minLoggerLevel) {
+                let logObj = {
+                    date: new Date(),
+                    location: location.href,
+                    projectName: CSLogger.settings.projectName,
+                    projectVersion: CSLogger.settings.projectVersion,
+                    stack: Utils.stack(),
+                    user: Utils.User.getInfo(),
+                    message,
+                    properties,
+                    status,
+                };
 
-            CSLogger.arrLog.push(logObj);
+                CSLogger.arrLog.push(logObj);
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public static showMessange(status: number = 0, message: string = ""): void {
-        let messangeLavel = "debug";
-        if (status >= 200 && status < 300) {
-            messangeLavel = "log";
-        } else if (status >= 300 && status < 400) {
-            messangeLavel = "info";
-        } else if (status >= 400 && status < 500) {
-            messangeLavel = "warn";
-        } else if (status >= 500) {
-            messangeLavel = "error";
-        }
-
+    public static showMessange(status: number, message: string): boolean {
         if (
-            typeof window === "object" &&
-            typeof window.Debug === "object" &&
-            typeof window.Debug.console === "object" &&
-            typeof window.Debug.console[messangeLavel] === "function"
+            typeof status === "number" &&
+            status > 0 &&
+            typeof message === "string" &&
+            message.length > 0
         ) {
-            window.Debug.console[messangeLavel](message);
-        } else if (
-            typeof window === "object" &&
-            typeof window.CSDebug === "object" &&
-            typeof window.CSDebug.console === "object" &&
-            typeof window.CSDebug.console[messangeLavel] === "function"
-        ) {
-            window.CSDebug.console[messangeLavel](message);
-        } else if (
-            typeof console === "object" &&
-            typeof console[messangeLavel] === "function"
-        ) {
-            console[messangeLavel](message);
+            let messangeLavel = "debug";
+            if (status >= 200 && status < 300) {
+                messangeLavel = "log";
+            } else if (status >= 300 && status < 400) {
+                messangeLavel = "info";
+            } else if (status >= 400 && status < 500) {
+                messangeLavel = "warn";
+            } else if (status >= 500) {
+                messangeLavel = "error";
+            }
+
+            if (
+                typeof window === "object" &&
+                typeof window.Debug === "object" &&
+                typeof window.Debug.console === "object" &&
+                typeof window.Debug.console[messangeLavel] === "function"
+            ) {
+                window.Debug.console[messangeLavel](message);
+            } else if (
+                typeof window === "object" &&
+                typeof window.CSDebug === "object" &&
+                typeof window.CSDebug.console === "object" &&
+                typeof window.CSDebug.console[messangeLavel] === "function"
+            ) {
+                window.CSDebug.console[messangeLavel](message);
+            } else if (
+                typeof console === "object" &&
+                typeof console[messangeLavel] === "function"
+            ) {
+                console[messangeLavel](message);
+            }
+
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -2,9 +2,7 @@
 declare var require: any;
 require("./index.html");
 
-import CSLoggerClass from "../../lib/CSLogger.ts";
-
-let CSLogger = CSLoggerClass({
+let CSLogger = require("../../lib/CSLogger.js")({
     loggerUrl: "http://localhost/",
     minLoggerLevel: 100,
     projectName: "",
