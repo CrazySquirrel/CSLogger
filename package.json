@@ -33,7 +33,8 @@
   "dependencies": {
     "AnimationFrame": "^1.0.x",
     "Utils": "^1.0.x",
-    "crypto-js": "^3.1.8"
+    "crypto-js": "^3.1.8",
+    "raven-js": "^3.9.1"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
@@ -44,20 +45,26 @@
     "babel-preset-es2015-loose": "^7.0.0",
     "browser-sync": "^2.15.0",
     "browser-sync-webpack-plugin": "^1.1.2",
+    "clean-webpack-plugin": "^0.1.13",
     "compression": "^1.6.2",
     "compression-webpack-plugin": "^0.3.1",
     "eslint": "^3.4.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-loader": "^0.4.4",
+    "jasmine": "^2.5.2",
+    "jasmine-core": "^2.5.2",
+    "jasmine-expect": "^3.0.1",
     "json-loader": "^0.5.4",
     "karma": "^1.3.0",
     "karma-browserstack-launcher": "^1.1.1",
-    "karma-coverage": "^1.1.1",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-matchers": "^3.0.1",
     "karma-opera-launcher": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-safari-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-jasmine-matchers": "^3.0.1",
     "karma-source-map-support": "^1.2.0",
     "karma-webpack": "^1.8.0",
     "string-replace-webpack-plugin": "https://github.com/CrazySquirrel/string-replace-webpack-plugin.git",
@@ -66,12 +73,6 @@
     "typedoc": "^0.5.1",
     "typescript": "^2.0.9",
     "webpack": "^1.13.3",
-    "webpack-notifier": "^1.4.1",
-    "clean-webpack-plugin": "^0.1.13",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "html-loader": "^0.4.4",
-    "jasmine": "^2.5.2",
-    "jasmine-core": "^2.5.2",
-    "jasmine-expect": "^3.0.1"
+    "webpack-notifier": "^1.4.1"
   }
 }

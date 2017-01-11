@@ -19,6 +19,8 @@ const MD5 = require("crypto-js/md5");
 import AnimationFrame from "AnimationFrame";
 import Utils from "Utils";
 
+import Raven from "raven-js";
+
 declare var global: any;
 
 let root;
@@ -64,6 +66,7 @@ class CSLogger {
     public static projectVersion: string = "#PACKAGE_VERSION#";
 
     public static settings = {
+        sentryUrl: "",
         loggerUrl: "",
         minLoggerLevel: 500,
         projectName: "",
@@ -78,6 +81,21 @@ class CSLogger {
                 }
             }
         }
+
+        if (
+            process.env.NODE_ENV === "production" &&
+            CSLogger.settings.sentryUrl
+        ) {
+            Raven.config(
+                CSLogger.settings.sentryUrl,
+                {
+                    logger: "CSLogger",
+                    release: CSLogger.settings.projectVersion,
+                    environment: process.env.NODE_ENV
+                }
+            ).install();
+        }
+
         return CSLogger;
     }
 
@@ -121,6 +139,26 @@ class CSLogger {
         }
     }
 
+    public static statusLavel(status: number): string|boolean {
+        if (
+            typeof status === "number" &&
+            status > 0
+        ) {
+            if (status >= 200 && status < 300) {
+                return "log";
+            } else if (status >= 300 && status < 400) {
+                return "info";
+            } else if (status >= 400 && status < 500) {
+                return "warning";
+            } else if (status >= 500) {
+                return "error";
+            }
+            return "debug";
+        } else {
+            return false;
+        }
+    }
+
     public static showMessange(status: number, message: string): boolean {
         if (
             typeof status === "number" &&
@@ -128,16 +166,7 @@ class CSLogger {
             typeof message === "string" &&
             message.length > 0
         ) {
-            let messangeLavel = "debug";
-            if (status >= 200 && status < 300) {
-                messangeLavel = "log";
-            } else if (status >= 300 && status < 400) {
-                messangeLavel = "info";
-            } else if (status >= 400 && status < 500) {
-                messangeLavel = "warn";
-            } else if (status >= 500) {
-                messangeLavel = "error";
-            }
+            let messangeLavel = CSLogger.statusLavel(status);
 
             if (
                 typeof window === "object" &&
@@ -181,7 +210,20 @@ class CSLogger {
                 })).toString();
                 if (CSLogger.arrSended.indexOf(uid) === -1) {
                     CSLogger.arrSended.push(uid);
+
                     if (
+                        process.env.NODE_ENV === "production" &&
+                        CSLogger.settings.sentryUrl
+                    ) {
+                        Raven.captureMessage(
+                            l.message,
+                            {
+                                level: CSLogger.statusLavel(l.status),
+                                logger: "CSLogger",
+                                extra: l,
+                            }
+                        );
+                    } else if (
                         process.env.NODE_ENV === "production" &&
                         CSLogger.settings.loggerUrl
                     ) {
