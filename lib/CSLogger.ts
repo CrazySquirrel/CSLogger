@@ -139,7 +139,7 @@ class CSLogger {
         }
     }
 
-    public static statusLavel(status: number): string|boolean {
+    public static statusLavel(status: number): string {
         if (
             typeof status === "number" &&
             status > 0
@@ -155,7 +155,7 @@ class CSLogger {
             }
             return "debug";
         } else {
-            return false;
+            return "";
         }
     }
 
