@@ -19,7 +19,7 @@ const MD5 = require("crypto-js/md5");
 import AnimationFrame from "AnimationFrame";
 import Utils from "Utils";
 
-import Raven from "raven-js";
+let Raven = require("raven-js");
 
 declare var global: any;
 
