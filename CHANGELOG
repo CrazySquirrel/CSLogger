@@ -1,3 +1,9 @@
+## [1.0.19 - 1.0.22] - 2016-12-06
+### Changed
+- Dependencies was updated
+- Build process was changed
+- Sentry support was added
+
 ## [1.0.18] - 2016-12-06
 ### Changed
 - Typing declarations was added
