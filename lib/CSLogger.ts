@@ -17,7 +17,8 @@ const MD5 = require("crypto-js/md5");
  * Import Animation frame
  */
 import AnimationFrame from "AnimationFrame";
-import Utils from "Utils";
+import UtilsMain from "UtilsMain";
+import UtilsUser from "UtilsUser";
 
 let Raven = require("raven-js");
 
@@ -124,8 +125,8 @@ class CSLogger {
           location: location.href,
           projectName: CSLogger.settings.projectName,
           projectVersion: CSLogger.settings.projectVersion,
-          stack: Utils.stack(),
-          user: Utils.User.getInfo(),
+          stack: UtilsMain.stack(),
+          user: UtilsUser.getInfo(),
           message,
           properties,
           status,

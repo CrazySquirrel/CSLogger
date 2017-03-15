@@ -121,7 +121,9 @@ module.exports = {
         extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
         alias: {
             "AnimationFrame": path.join(__dirname, "node_modules") + "/AnimationFrame/lib/AnimationFrame.ts",
-            "Utils": path.join(__dirname, "node_modules") + "/Utils/lib/Utils.ts"
+            "Utils": path.join(__dirname, "node_modules") + "/Utils/lib/Utils.ts",
+            "UtilsMain": path.join(__dirname, "node_modules") + "/Utils/lib/UtilsMain.ts",
+            "UtilsUser": path.join(__dirname, "node_modules") + "/Utils/lib/UtilsUser.ts"
         }
     },
     resolveLoader: {
