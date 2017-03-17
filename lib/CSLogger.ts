@@ -219,9 +219,12 @@ class CSLogger {
             Raven.captureMessage(
                 l.message,
                 {
+                  extra: l,
                   level: CSLogger.statusLavel(l.status),
                   logger: "CSLogger",
-                  extra: l,
+                  tags: {
+                    status: l.status,
+                  },
                 }
             );
           } else if (
