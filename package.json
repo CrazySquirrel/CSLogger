@@ -27,7 +27,10 @@
     "release": "standard-version && git push origin master --tags",
     "commit": "git-cz -a"
   },
-  "pre-commit": [],
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "eslintConfig": {
     "env": {
       "es6": true
