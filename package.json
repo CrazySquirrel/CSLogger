@@ -20,9 +20,12 @@
     "production:watch": "NODE_ENV=production webpack --config=webpack.build.config.js --watch",
     "testing": "NODE_ENV=testing webpack --bail --config=webpack.build.config.js",
     "testing:watch": "NODE_ENV=testing webpack --config=webpack.build.config.js --watch",
-    "karma": "rm -rf ./doc/report/ && rm -rf ./doc/coverage/ && NODE_ENV=testing karma start karma.conf.js",
+    "test": "rm -rf ./doc/report/ && rm -rf ./doc/coverage/ && NODE_ENV=testing karma start karma.conf.js",
     "stats": "NODE_ENV=development webpack --bail --config=webpack.build.config.js --profile --json > ./doc/stats.json",
-    "docs": "rm -rf ./doc/js/ && typedoc --mode file --target ES6 --module 'commonjs' --out ./doc/js/ ./src/ts/"
+    "docs": "rm -rf ./doc/js/ && typedoc --mode file --target ES6 --module 'commonjs' --out ./doc/js/ ./src/ts/",
+    "lint": "codeclimate analyze",
+    "release": "standard-version && git push origin master --tags",
+    "commit": "git-cz -a"
   },
   "pre-commit": [],
   "eslintConfig": {
@@ -46,8 +49,10 @@
     "browser-sync": "^2.15.0",
     "browser-sync-webpack-plugin": "^1.1.2",
     "clean-webpack-plugin": "^0.1.13",
+    "commitizen": "^2.9.6",
     "compression": "^1.6.2",
-    "compression-webpack-plugin": "^0.3.1",
+    "compression-webpack-plugin": "^0.4.0",
+    "cz-conventional-changelog": "^2.0.0",
     "eslint": "^3.4.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-loader": "^0.4.4",
@@ -67,6 +72,7 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-source-map-support": "^1.2.0",
     "karma-webpack": "^1.8.0",
+    "standard-version": "^4.0.0",
     "string-replace-webpack-plugin": "https://github.com/CrazySquirrel/string-replace-webpack-plugin.git",
     "ts-loader": "^0.8.2",
     "tslint": "^3.15.1",
@@ -74,5 +80,10 @@
     "typescript": "^2.0.9",
     "webpack": "^1.13.3",
     "webpack-notifier": "^1.4.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
