@@ -173,7 +173,12 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: "json-loader"
+        loaders: [
+          StringReplacePlugin.replace({
+            replacements: replacements
+          }),
+          "json-loader"
+        ]
       }
     ]
   }
