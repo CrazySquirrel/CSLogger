@@ -19,7 +19,7 @@
   "jsnext:main": "./lib/CSLogger.js",
   "types": "./lib/CSLogger.d.ts",
   "bin": {
-    "AnimationFrame": "./lib/CSLogger.js"
+    "CSLogger": "./lib/CSLogger.js"
   },
   "man": "./README.md",
   "repository": {
