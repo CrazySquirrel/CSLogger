@@ -1,7 +1,5 @@
 "use strict";
 
-declare let beforeEach: any;
-declare let afterEach: any;
 declare let describe: any;
 declare let it: any;
 declare let expect: any;
@@ -24,7 +22,7 @@ describe("CSLogger", () => {
   });
 
   it("CSLogger.showMessange", () => {
-    let paramsValues = [undefined, false, true, 0, 100, 200, 300, 400, 500, 600, 700, "", "test"];
+    let paramsValues: any = [undefined, false, true, 0, 100, 200, 300, 400, 500, 600, 700, "", "test"];
     let dataSet = [];
     for (let x1 of paramsValues) {
       for (let x2 of paramsValues) {
@@ -60,7 +58,7 @@ describe("CSLogger", () => {
   });
 
   it("CSLogger.log", () => {
-    let paramsValues = [undefined, false, true, 0, 100, "", "test", {}, () => {
+    let paramsValues: any = [undefined, false, true, 0, 100, "", "test", {}, () => {
     }, window];
     let dataSet = [];
     for (let x1 of paramsValues) {

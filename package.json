@@ -1,14 +1,27 @@
 {
   "name": "CSLogger",
   "version": "1.0.28",
-  "main": "./lib/CSLogger.js",
   "description": "Logger for JavaScript messages.",
   "keywords": [
     "TypeScript",
     "Logger"
   ],
-  "author": "Sergey Yastrebov <info@crazysquirrel.ru>",
+  "homepage": "https://github.com/CrazySquirrel/CSLogger",
+  "bugs": {
+    "url": "https://github.com/CrazySquirrel/CSLogger/issues",
+    "email": "info@crazysquirrel.ru"
+  },
   "license": "MIT",
+  "author": "Sergey Yastrebov <info@crazysquirrel.ru>",
+  "main": "./lib/CSLogger.js",
+  "module": "./lib/CSLogger.js",
+  "browser": "./lib/CSLogger.js",
+  "jsnext:main": "./lib/CSLogger.js",
+  "types": "./lib/CSLogger.d.ts",
+  "bin": {
+    "AnimationFrame": "./lib/CSLogger.js"
+  },
+  "man": "./README.md",
   "repository": {
     "type": "git",
     "url": "git@github.com:CrazySquirrel/CSLogger.git"
@@ -37,12 +50,15 @@
     }
   },
   "dependencies": {
-    "AnimationFrame": "^1.0.x",
-    "Utils": "^1.0.x",
+    "AnimationFrame": "^1.x.x",
+    "Utils": "^1.x.x",
     "crypto-js": "^3.1.8",
     "raven-js": "^3.9.1"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.47",
+    "@types/jasmine-expect": "^3.6.1",
+    "@types/jasmine-matchers": "^0.2.30",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-istanbul": "^3.0.0",

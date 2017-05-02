@@ -2,21 +2,8 @@
   "compilerOptions": {
     "target": "es6",
     "sourceMap": false,
-    "inlineSourceMap": true
-  },
-  "paths": {
-    "AnimationFrame": [
-      "./node_modules/AnimationFrame/lib/AnimationFrame.ts"
-    ],
-    "Utils": [
-      "./node_modules/Utils/lib/Utils.ts"
-    ],
-    "UtilsMain": [
-      "./node_modules/Utils/lib/UtilsMain.ts"
-    ],
-    "UtilsUser": [
-      "./node_modules/Utils/lib/UtilsUser.ts"
-    ]
+    "inlineSourceMap": true,
+    "declaration": true
   },
   "files": [
     "./lib/CSLogger.ts"

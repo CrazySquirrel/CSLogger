@@ -16,9 +16,9 @@ const MD5 = require("crypto-js/md5");
 /**
  * Import Animation frame
  */
-import AnimationFrame from "AnimationFrame";
-import UtilsMain from "UtilsMain";
-import UtilsUser from "UtilsUser";
+import AnimationFrame from "AnimationFrame/lib/AnimationFrame";
+import UtilsMain from "Utils/lib/UtilsMain";
+import UtilsUser from "Utils/lib/UtilsUser";
 
 let Raven = require("raven-js");
 
@@ -57,7 +57,7 @@ const STATUSES: any = {
   0: "Something",
 };
 
-class CSLogger {
+export class CSLogger {
   public static eventListenerAdded: boolean = false;
 
   public static arrLog: Array<any> = [];
@@ -67,11 +67,11 @@ class CSLogger {
   public static projectVersion: string = "#PACKAGE_VERSION#";
 
   public static settings = {
-    sentryUrl: "",
     loggerUrl: "",
     minLoggerLevel: 500,
     projectName: "",
     projectVersion: "",
+    sentryUrl: "",
   };
 
   public static init(settings) {
@@ -90,9 +90,9 @@ class CSLogger {
       Raven.config(
           CSLogger.settings.sentryUrl,
           {
+            environment: process.env.NODE_ENV,
             logger: "CSLogger",
             release: CSLogger.settings.projectVersion,
-            environment: process.env.NODE_ENV
           }
       ).install();
     }
