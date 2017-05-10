@@ -1,7 +1,7 @@
 export declare class CSLogger {
     static eventListenerAdded: boolean;
-    static arrLog: Array<any>;
-    static arrSended: Array<any>;
+    static arrLog: any[];
+    static arrSended: any[];
     static projectName: string;
     static projectVersion: string;
     static settings: {
@@ -29,5 +29,5 @@ export declare class CSLogger {
 /**
  * Return logger
  */
-declare let _Init: typeof CSLogger.init;
+declare const _Init: typeof CSLogger.init;
 export default _Init;

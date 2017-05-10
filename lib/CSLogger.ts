@@ -20,7 +20,7 @@ import AnimationFrame from "AnimationFrame/lib/AnimationFrame";
 import UtilsMain from "Utils/lib/UtilsMain";
 import UtilsUser from "Utils/lib/UtilsUser";
 
-let Raven = require("raven-js");
+const Raven = require("raven-js");
 
 declare var global: any;
 
@@ -60,8 +60,8 @@ const STATUSES: any = {
 export class CSLogger {
   public static eventListenerAdded: boolean = false;
 
-  public static arrLog: Array<any> = [];
-  public static arrSended: Array<any> = [];
+  public static arrLog: any[] = [];
+  public static arrSended: any[] = [];
 
   public static projectName: string = "#PACKAGE_NAME#";
   public static projectVersion: string = "#PACKAGE_VERSION#";
@@ -76,7 +76,8 @@ export class CSLogger {
 
   public static init(settings) {
     if (typeof settings === "object") {
-      for (let prop in settings) {
+      for (let j = 0; j < settings.length; j++) {
+        const prop = settings[j];
         if (settings.hasOwnProperty(prop)) {
           CSLogger.settings[prop] = settings[prop];
         }
@@ -93,7 +94,7 @@ export class CSLogger {
             environment: process.env.NODE_ENV,
             logger: "CSLogger",
             release: CSLogger.settings.projectVersion,
-          }
+          },
       ).install();
     }
 
@@ -120,7 +121,7 @@ export class CSLogger {
       properties = properties || {};
 
       if (status >= CSLogger.settings.minLoggerLevel) {
-        let logObj = {
+        const logObj = {
           date: new Date(),
           location: location.href,
           projectName: CSLogger.settings.projectName,
@@ -167,7 +168,7 @@ export class CSLogger {
         typeof message === "string" &&
         message.length > 0
     ) {
-      let messangeLavel = CSLogger.statusLavel(status);
+      const messangeLavel = CSLogger.statusLavel(status);
 
       if (
           typeof window === "object" &&
@@ -201,9 +202,10 @@ export class CSLogger {
    */
   public static watch() {
     if (CSLogger.arrLog.length > 0 && CSLogger.arrLog.length < 100) {
-      for (let l of CSLogger.arrLog) {
-        let data = encodeURIComponent(JSON.stringify(l));
-        let uid = MD5(JSON.stringify({
+      for (let j = 0; j < CSLogger.arrLog.length; j++) {
+        const l = CSLogger.arrLog[j];
+        const data = encodeURIComponent(JSON.stringify(l));
+        const uid = MD5(JSON.stringify({
           message: l.message,
           projectName: l.projectName,
           projectVersion: l.projectVersion,
@@ -225,13 +227,13 @@ export class CSLogger {
                   tags: {
                     status: l.status,
                   },
-                }
+                },
             );
           } else if (
               process.env.NODE_ENV === "production" &&
               CSLogger.settings.loggerUrl
           ) {
-            let i = new Image();
+            const i = new Image();
             i.src = CSLogger.settings.loggerUrl + "?uid=" + uid + "&data=" + data;
           } else {
             CSLogger.showMessange(l.status, l);
@@ -246,7 +248,7 @@ export class CSLogger {
  * Add logger to global error event
  */
 if (!root.eventListenerAdded) {
-  let errorHandler = root.onerror;
+  const errorHandler = root.onerror;
 
   root.onerror = (errorMsg, url, lineNumber, column, errorObj) => {
     if (typeof errorHandler === "function") {
@@ -260,7 +262,7 @@ if (!root.eventListenerAdded) {
           errorObj,
           lineNumber,
           url,
-        }
+        },
     );
   };
 
@@ -273,6 +275,6 @@ AnimationFrame.subscribe({}, CSLogger.watch, []);
 /**
  * Return logger
  */
-let _Init = CSLogger.init;
+const _Init = CSLogger.init;
 export default _Init;
 module.exports = _Init;

@@ -7,7 +7,7 @@ declare let require: any;
 
 import CSLoggerClass from "../lib/CSLogger";
 
-let CSLogger = CSLoggerClass({
+const CSLogger = CSLoggerClass({
   loggerUrl: "http://localhost/",
   minLoggerLevel: 100,
   projectName: "",
@@ -22,16 +22,21 @@ describe("CSLogger", () => {
   });
 
   it("CSLogger.showMessange", () => {
-    let paramsValues: any = [undefined, false, true, 0, 100, 200, 300, 400, 500, 600, 700, "", "test"];
-    let dataSet = [];
-    for (let x1 of paramsValues) {
-      for (let x2 of paramsValues) {
+    const paramsValues: any = [undefined, false, true, 0, 100, 200, 300, 400, 500, 600, 700, "", "test"];
+    const dataSet = [];
+
+    for (let i1 = 0; i1 < paramsValues.length; i1++) {
+      const x1 = paramsValues[i1];
+
+      for (let i2 = 0; i2 < paramsValues.length; i2++) {
+        const x2 = paramsValues[i2];
+
         if (
             [x2].indexOf(x1) === -1 &&
             [x1].indexOf(x2) === -1
         ) {
-          let params = [x1, x2];
-          let cond = (
+          const params = [x1, x2];
+          const cond = (
               typeof x1 === "number" &&
               x1 > 0 &&
               typeof x2 === "string" &&
@@ -44,8 +49,9 @@ describe("CSLogger", () => {
         }
       }
     }
-    for (let set of dataSet) {
-      let result = CSLogger.showMessange.apply(CSLogger, set.params);
+    for (let j = 0; j < dataSet.length; j++) {
+      const set = dataSet[j];
+      const result = CSLogger.showMessange.apply(CSLogger, set.params);
 
       expect(typeof result).toEqual("boolean");
 
@@ -58,19 +64,26 @@ describe("CSLogger", () => {
   });
 
   it("CSLogger.log", () => {
-    let paramsValues: any = [undefined, false, true, 0, 100, "", "test", {}, () => {
+    const paramsValues: any = [undefined, false, true, 0, 100, "", "test", {}, () => {
     }, window];
-    let dataSet = [];
-    for (let x1 of paramsValues) {
-      for (let x2 of paramsValues) {
-        for (let x3 of paramsValues) {
+    const dataSet = [];
+
+    for (let i1 = 0; i1 < paramsValues.length; i1++) {
+      const x1 = paramsValues[i1];
+
+      for (let i2 = 0; i2 < paramsValues.length; i2++) {
+        const x2 = paramsValues[i2];
+
+        for (let i3 = 0; i3 < paramsValues.length; i3++) {
+          const x3 = paramsValues[i3];
+
           if (
               [x2, x3].indexOf(x1) === -1 &&
               [x1, x3].indexOf(x2) === -1 &&
               [x1, x2].indexOf(x3) === -1
           ) {
-            let params = [x1, x2];
-            let cond = (
+            const params = [x1, x2];
+            const cond = (
                 typeof x1 === "number" &&
                 x1 > 0 &&
                 typeof x2 === "string" &&
@@ -84,8 +97,9 @@ describe("CSLogger", () => {
         }
       }
     }
-    for (let set of dataSet) {
-      let result = CSLogger.log.apply(CSLogger, set.params);
+    for (let j = 0; j < dataSet.length; j++) {
+      const set = dataSet[j];
+      const result = CSLogger.log.apply(CSLogger, set.params);
 
       expect(typeof result).toEqual("boolean");
 
