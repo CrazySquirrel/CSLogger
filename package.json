@@ -1,6 +1,6 @@
 {
   "name": "CSLogger",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Logger for JavaScript messages.",
   "keywords": [
     "TypeScript",

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.32"></a>
+## [1.0.32](https://github.com/CrazySquirrel/CSLogger/compare/v1.0.31...v1.0.32) (2017-05-23)
+
+
+### Bug Fixes
+
+* **Init:** Init method bug fix ([aab3c2f](https://github.com/CrazySquirrel/CSLogger/commit/aab3c2f))
+
+
+
 <a name="1.0.31"></a>
 ## [1.0.31](https://github.com/CrazySquirrel/CSLogger/compare/v1.0.30...v1.0.31) (2017-05-10)
 
