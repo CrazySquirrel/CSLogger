@@ -76,8 +76,7 @@ export class CSLogger {
 
   public static init(settings) {
     if (typeof settings === "object") {
-      for (let j = 0; j < settings.length; j++) {
-        const prop = settings[j];
+      for (const prop in settings) {
         if (settings.hasOwnProperty(prop)) {
           CSLogger.settings[prop] = settings[prop];
         }
