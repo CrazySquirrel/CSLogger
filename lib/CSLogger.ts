@@ -140,7 +140,7 @@ export class CSLogger {
     }
   }
 
-  public static statusLavel(status: number): string {
+  public static statusLavelSentry(status: number): string {
     if (
         typeof status === "number" &&
         status > 0
@@ -160,6 +160,26 @@ export class CSLogger {
     }
   }
 
+  public static statusLavelConsole(status: number): string {
+    if (
+        typeof status === "number" &&
+        status > 0
+    ) {
+      if (status >= 200 && status < 300) {
+        return "log";
+      } else if (status >= 300 && status < 400) {
+        return "info";
+      } else if (status >= 400 && status < 500) {
+        return "warn";
+      } else if (status >= 500) {
+        return "error";
+      }
+      return "debug";
+    } else {
+      return "";
+    }
+  }
+
   public static showMessange(status: number, message: string): boolean {
     if (
         typeof status === "number" &&
@@ -167,7 +187,7 @@ export class CSLogger {
         typeof message === "string" &&
         message.length > 0
     ) {
-      const messangeLavel = CSLogger.statusLavel(status);
+      const messangeLavel = CSLogger.statusLavelConsole(status);
 
       if (
           typeof window === "object" &&
@@ -221,7 +241,7 @@ export class CSLogger {
                 l.message,
                 {
                   extra: l,
-                  level: CSLogger.statusLavel(l.status),
+                  level: CSLogger.statusLavelSentry(l.status),
                   logger: "CSLogger",
                   tags: {
                     status: l.status,
