@@ -235,7 +235,7 @@ export class CSLogger {
             const i = new Image();
             i.src = CSLogger.settings.loggerUrl + "?uid=" + uid + "&data=" + data;
           } else {
-            CSLogger.showMessange(l.status, l);
+            CSLogger.showMessange(l.status, l.message);
           }
         }
       }
