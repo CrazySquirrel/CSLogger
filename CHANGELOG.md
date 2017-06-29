@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.33"></a>
+## [1.0.33](https://github.com/CrazySquirrel/CSLogger/compare/v1.0.32...v1.0.33) (2017-06-29)
+
+
+### Bug Fixes
+
+* **Watcher:** ShowMessage bug fix in watcher method ([92d0369](https://github.com/CrazySquirrel/CSLogger/commit/92d0369))
+
+
+
 <a name="1.0.32"></a>
 ## [1.0.32](https://github.com/CrazySquirrel/CSLogger/compare/v1.0.31...v1.0.32) (2017-05-23)
 
